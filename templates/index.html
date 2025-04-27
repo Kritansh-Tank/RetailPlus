@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RetailPlus</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link
+      href="{{ url_for('static', filename='css/retailpulse.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-retailpulse">
+      <div class="container-fluid">
+        <a class="navbar-brand">
+          <i class="bi bi-bar-chart-fill me-2"></i>
+          Retail<span>Plus</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="retailpulse-container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1>Intelligent Inventory Optimization</h1>
+        <p>Optimize your retail inventory with AI-powered multi-agent system</p>
+      </div>
+
+      <!-- Dashboard Statistics -->
+      <div class="dashboard-stats">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-box-seam"></i></div>
+          <div class="stat-value counter-value" data-target="1247">0</div>
+          <div class="stat-label">Products Managed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-shop"></i></div>
+          <div class="stat-value counter-value" data-target="86">0</div>
+          <div class="stat-label">Stores</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-exclamation-triangle"></i>
+          </div>
+          <div class="stat-value counter-value" data-target="42">0</div>
+          <div class="stat-label">Critical Inventory Items</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <div class="stat-value counter-value" data-target="94">0</div>
+          <div class="stat-label">Optimization Accuracy (%)</div>
+        </div>
+      </div>
+
+      <!-- Main Content Tabs -->
+      <ul class="nav nav-tabs tab-retailpulse" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="dashboard-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#dashboard"
+            type="button"
+            role="tab"
+            aria-controls="dashboard"
+            aria-selected="true"
+          >
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="optimize-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#optimize"
+            type="button"
+            role="tab"
+            aria-controls="optimize"
+            aria-selected="false"
+          >
+            <i class="bi bi-lightning-charge"></i> Optimize
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="forecast-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#forecast"
+            type="button"
+            role="tab"
+            aria-controls="forecast"
+            aria-selected="false"
+          >
+            <i class="bi bi-graph-up"></i> Forecast
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="inventory-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#inventory"
+            type="button"
+            role="tab"
+            aria-controls="inventory"
+            aria-selected="false"
+          >
+            <i class="bi bi-box"></i> Inventory
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pricing-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#pricing"
+            type="button"
+            role="tab"
+            aria-controls="pricing"
+            aria-selected="false"
+          >
+            <i class="bi bi-tag"></i> Pricing
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="supply-chain-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#supply-chain"
+            type="button"
+            role="tab"
+            aria-controls="supply-chain"
+            aria-selected="false"
+          >
+            <i class="bi bi-truck"></i> Supply Chain
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+        <!-- Dashboard Tab -->
+        <div
+          class="tab-pane fade show active"
+          id="dashboard"
+          role="tabpanel"
+          aria-labelledby="dashboard-tab"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-retailpulse">
+                <div class="card-header card-header-with-actions">
+                  <h5><i class="bi bi-trophy"></i> Top Products by Sales</h5>
+                  <button
+                    class="btn btn-sm btn-retailpulse-primary"
+                    id="loadTopProducts"
+                  >
+                    <i class="bi bi-arrow-repeat"></i> Refresh
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div
+                    class="spinner-border text-primary spinner-retailpulse"
+                    id="topProductsSpinner"
+                    role="status"
+                  ></div>
+                  <div id="topProductsContainer">
+                    <div class="text-center text-muted py-4">
+                      <i
+                        class="bi bi-bar-chart-line"
+                        style="font-size: 2rem"
+                      ></i>
+                      <p class="mt-2">
+                        Click 'Refresh' to load top products data
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-retailpulse">
+                <div class="card-header card-header-with-actions">
+                  <h5>
+                    <i class="bi bi-exclamation-triangle"></i> Critical
+                    Inventory Items
+                  </h5>
+                  <button
+                    class="btn btn-sm btn-retailpulse-primary"
+                    id="loadCriticalInventory"
+                  >
+                    <i class="bi bi-arrow-repeat"></i> Refresh
+                  </button>
+                </div>
+                <div class="card-body">
+                  <div
+                    class="spinner-border text-primary spinner-retailpulse"
+                    id="criticalInventorySpinner"
+                    role="status"
+                  ></div>
+                  <div id="criticalInventoryContainer">
+                    <div class="text-center text-muted py-4">
+                      <i
+                        class="bi bi-exclamation-diamond"
+                        style="font-size: 2rem"
+                      ></i>
+                      <p class="mt-2">
+                        Click 'Refresh' to load critical inventory data
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="card card-retailpulse">
+                <div class="card-header">
+                  <h5>
+                    <i class="bi bi-graph-up"></i> Sales & Inventory Trends
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <div class="chart-container" id="trendChart">
+                    <div class="text-center text-muted py-5">
+                      <i
+                        class="bi bi-bar-chart-line"
+                        style="font-size: 3rem"
+                      ></i>
+                      <p class="mt-3">Trends visualization coming soon</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optimize Tab -->
+        <div
+          class="tab-pane fade"
+          id="optimize"
+          role="tabpanel"
+          aria-labelledby="optimize-tab"
+        >
+          <div class="card card-retailpulse">
+            <div class="card-header">
+              <h5>
+                <i class="bi bi-lightning-charge"></i> Inventory Optimization
+              </h5>
+            </div>
+            <div class="card-body">
+              <form id="optimizeForm">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="productId" class="form-label">Product ID</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-box"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="productId"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="storeId" class="form-label">Store ID</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-shop"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="storeId"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-retailpulse-primary">
+                  <i class="bi bi-lightning-charge"></i> Optimize Inventory
+                  <span
+                    class="spinner-border spinner-border-sm spinner-retailpulse"
+                    id="optimizeSpinner"
+                    role="status"
+                  ></span>
+                </button>
+              </form>
+              <div class="mt-4">
+                <h6><i class="bi bi-info-circle"></i> Optimization Results:</h6>
+                <div class="result-container" id="optimizeResult">
+                  <p class="text-muted">
+                    Enter a Product ID and Store ID above to generate
+                    optimization recommendations
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Forecast Tab -->
+        <div
+          class="tab-pane fade"
+          id="forecast"
+          role="tabpanel"
+          aria-labelledby="forecast-tab"
+        >
+          <div class="card card-retailpulse">
+            <div class="card-header">
+              <h5><i class="bi bi-graph-up"></i> Demand Forecast</h5>
+            </div>
+            <div class="card-body">
+              <form id="forecastForm">
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="forecastProductId" class="form-label"
+                      >Product ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-box"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="forecastProductId"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="forecastStoreId" class="form-label"
+                      >Store ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-shop"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="forecastStoreId"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="daysAhead" class="form-label">Days Ahead</label>
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-calendar"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="daysAhead"
+                        value="30"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-retailpulse-primary">
+                  <i class="bi bi-graph-up"></i> Generate Forecast
+                  <span
+                    class="spinner-border spinner-border-sm spinner-retailpulse"
+                    id="forecastSpinner"
+                    role="status"
+                  ></span>
+                </button>
+              </form>
+              <div class="mt-4">
+                <h6><i class="bi bi-info-circle"></i> Forecast Results:</h6>
+                <div class="result-container" id="forecastResult">
+                  <p class="text-muted">
+                    Enter a Product ID and Store ID above to generate demand
+                    forecasts
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Tab -->
+        <div
+          class="tab-pane fade"
+          id="inventory"
+          role="tabpanel"
+          aria-labelledby="inventory-tab"
+        >
+          <div class="card card-retailpulse">
+            <div class="card-header">
+              <h5><i class="bi bi-box"></i> Inventory Status</h5>
+            </div>
+            <div class="card-body">
+              <form id="inventoryForm">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="inventoryProductId" class="form-label"
+                      >Product ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-box"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="inventoryProductId"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inventoryStoreId" class="form-label"
+                      >Store ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-shop"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="inventoryStoreId"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-retailpulse-primary">
+                  <i class="bi bi-search"></i> Check Inventory Status
+                  <span
+                    class="spinner-border spinner-border-sm spinner-retailpulse"
+                    id="inventorySpinner"
+                    role="status"
+                  ></span>
+                </button>
+              </form>
+              <div class="mt-4">
+                <h6>
+                  <i class="bi bi-info-circle"></i> Inventory Status Results:
+                </h6>
+                <div class="result-container" id="inventoryResult">
+                  <p class="text-muted">
+                    Enter a Product ID and Store ID above to check inventory
+                    status
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing Tab -->
+        <div
+          class="tab-pane fade"
+          id="pricing"
+          role="tabpanel"
+          aria-labelledby="pricing-tab"
+        >
+          <div class="card card-retailpulse">
+            <div class="card-header">
+              <h5><i class="bi bi-tag"></i> Pricing Optimization</h5>
+            </div>
+            <div class="card-body">
+              <form id="pricingForm">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="pricingProductId" class="form-label"
+                      >Product ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-box"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="pricingProductId"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="pricingStoreId" class="form-label"
+                      >Store ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-shop"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="pricingStoreId"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-retailpulse-primary">
+                  <i class="bi bi-tag"></i> Optimize Pricing
+                  <span
+                    class="spinner-border spinner-border-sm spinner-retailpulse"
+                    id="pricingSpinner"
+                    role="status"
+                  ></span>
+                </button>
+              </form>
+              <div class="mt-4">
+                <h6>
+                  <i class="bi bi-info-circle"></i> Pricing Optimization
+                  Results:
+                </h6>
+                <div class="result-container" id="pricingResult">
+                  <p class="text-muted">
+                    Enter a Product ID and Store ID above to generate pricing
+                    recommendations
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supply Chain Tab -->
+        <div
+          class="tab-pane fade"
+          id="supply-chain"
+          role="tabpanel"
+          aria-labelledby="supply-chain-tab"
+        >
+          <div class="card card-retailpulse">
+            <div class="card-header">
+              <h5><i class="bi bi-truck"></i> Supply Chain Recommendations</h5>
+            </div>
+            <div class="card-body">
+              <form id="supplyChainForm">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label for="supplyChainProductId" class="form-label"
+                      >Product ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-box"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="supplyChainProductId"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="supplyChainStoreId" class="form-label"
+                      >Store ID</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text"
+                        ><i class="bi bi-shop"></i
+                      ></span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="supplyChainStoreId"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-retailpulse-primary">
+                  <i class="bi bi-truck"></i> Get Supply Chain Recommendations
+                  <span
+                    class="spinner-border spinner-border-sm spinner-retailpulse"
+                    id="supplyChainSpinner"
+                    role="status"
+                  ></span>
+                </button>
+              </form>
+              <div class="mt-4">
+                <h6>
+                  <i class="bi bi-info-circle"></i> Supply Chain
+                  Recommendations:
+                </h6>
+                <div class="result-container" id="supplyChainResult">
+                  <p class="text-muted">
+                    Enter a Product ID and Store ID above to generate supply
+                    chain recommendations
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-muted py-4 mt-5">
+      <div class="container">
+        <p>RetailPlus &copy; 2025 | Powered by Multi-Agent AI Technology</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/retailpulse.js') }}"></script>
+  </body>
+</html>
