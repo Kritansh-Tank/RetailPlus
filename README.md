@@ -50,32 +50,32 @@ The system uses SQLite for data storage and an Ollama LLM (qwen2.5:0.5b) running
 
 - Dashboard
 - 
-![Dashboard](docs/images/Dashboard.png)
+![Dashboard](static/images/Dashboard.png)
 
 
 - Optimize_Inventory
 
-![Optimize_Inventory](docs/images/Optimize_Inventory.png)
+![Optimize_Inventory](static/images/Optimize_Inventory.png)
 
 
 - Generate_Forecast
 
-![Generate_Forecast](docs/images/Generate_Forecast.png)
+![Generate_Forecast](static/images/Generate_Forecast.png)
 
 
 - Check_Inventory_Status
 
-![Check_Inventory_Status](docs/images/Check_Inventory_Status.png)
+![Check_Inventory_Status](static/images/Check_Inventory_Status.png)
 
 
 - Optimize_Pricing
 
-![Optimize_Pricing](docs/images/Optimize_Pricing.png)
+![Optimize_Pricing](static/images/Optimize_Pricing.png)
 
 
 - Get_Supply_Chain_Recommendations
 
-![Get_Supply_Chain_Recommendations](docs/images/Get_Supply_Chain_Recommendations.png)
+![Get_Supply_Chain_Recommendations](static/images/Get_Supply_Chain_Recommendations.png)
 
 
 ### Dashboard Interface
