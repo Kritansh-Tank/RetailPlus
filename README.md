@@ -46,49 +46,6 @@ The system uses SQLite for data storage and an Ollama LLM (qwen2.5:0.5b) running
    ```
    Then access the web UI at http://localhost:5000
 
-### Output
-
-- Dashboard
-
-![Dashboard](static/images/Dashboard.png)
-
-
-- Optimize Inventory
-
-![Optimize_Inventory](static/images/Optimize_Inventory.png)
-
-
-- Generate Forecast
-
-![Generate_Forecast](static/images/Generate_Forecast.png)
-
-
-- Check Inventory Status
-
-![Check_Inventory_Status](static/images/Check_Inventory_Status.png)
-
-
-- Optimize Pricing
-
-![Optimize_Pricing](static/images/Optimize_Pricing.png)
-
-
-- Get Supply Chain Recommendations
-
-![Get_Supply_Chain_Recommendations](static/images/Get_Supply_Chain_Recommendations.png)
-
-
-### Dashboard Interface
-
-The web interface provides:
-
-- **Dashboard Overview**: Summary statistics of products, stores, and critical inventory items.
-- **Optimization Tool**: Input product and store IDs to receive AI-powered optimization recommendations.
-- **Demand Forecasting**: Visual forecasts with trend analysis and confidence levels.
-- **Inventory Status**: Real-time inventory level monitoring with status indicators.
-- **Pricing Optimization**: Intelligent pricing recommendations with elasticity assessments.
-- **Supply Chain Management**: Order quantity recommendations and supplier relationship insights.
-
 ### API Endpoints
 
 The following API endpoints are available:
@@ -157,6 +114,48 @@ The system uses a SQLite database with three main tables:
 - Numpy 1.24.3
 - Ollama LLM (qwen2.5:0.5b)
 
+## Output
+
+The web interface provides:
+
+- **Dashboard Overview**: Summary statistics of products, stores, and critical inventory items.
+- **Optimization Tool**: Input product and store IDs to receive AI-powered optimization recommendations.
+- **Demand Forecasting**: Visual forecasts with trend analysis and confidence levels.
+- **Inventory Status**: Real-time inventory level monitoring with status indicators.
+- **Pricing Optimization**: Intelligent pricing recommendations with elasticity assessments.
+- **Supply Chain Management**: Order quantity recommendations and supplier relationship insights.
+
+## User Interface
+
+- Dashboard
+
+![Dashboard](static/images/Dashboard.png)
+
+
+- Optimize Inventory
+
+![Optimize_Inventory](static/images/Optimize_Inventory.png)
+
+
+- Generate Forecast
+
+![Generate_Forecast](static/images/Generate_Forecast.png)
+
+
+- Check Inventory Status
+
+![Check_Inventory_Status](static/images/Check_Inventory_Status.png)
+
+
+- Optimize Pricing
+
+![Optimize_Pricing](static/images/Optimize_Pricing.png)
+
+
+- Get Supply Chain Recommendations
+
+![Get_Supply_Chain_Recommendations](static/images/Get_Supply_Chain_Recommendations.png)
+
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+MIT License - See LICENSE file for details
